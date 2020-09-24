@@ -1,0 +1,28 @@
+.box {
+  width: 420px;
+  height: 420px;
+  background-color: #e8e8e8;
+  margin-left: 450px;
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.elements {
+  width: 100px;
+  height: 100px;
+  background-color: #40a8c4;
+  color: white;
+  text-align: center;
+  border-style: solid;
+  border-color: #a2d5f2;
+  position: relative;
+  transition: top 5s;
+}
+
+.temp{
+
+  top: 105px;
+
+
+}
