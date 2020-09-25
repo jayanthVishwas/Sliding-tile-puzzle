@@ -158,7 +158,7 @@ function startTimer(status){
 }
 
 function startGame() {
-  title.innerHTML="......."
+  title.innerHTML="Level: Medium"
   timerDiv.style.color="#fef2bf"
   timerDiv.innerHTML=60
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, ""]
