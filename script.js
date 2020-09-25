@@ -1,5 +1,10 @@
+let title = document.createElement("h1")
+title.setAttribute("id","level-title")
+title.innerHTML="Press Start"
+
 let boxDiv = document.createElement("div")
 boxDiv.setAttribute("class", "box")
+
 
 let e1 = createElement(1, "id1")
 let e2 = createElement(2, "id2")
@@ -23,13 +28,25 @@ startBtn.setAttribute("id", "start-Btn")
 startBtn.innerHTML = "Start"
 startBtn.onclick = startGame
 
+let resetBtn = document.createElement("button")
+resetBtn.setAttribute("id","reset-btn")
+resetBtn.innerHTML="Reset"
+resetBtn.onclick = resetGame
 
-document.addEventListener("click", printMousePos);
+let timerDiv = document.createElement("div")
+timerDiv.setAttribute("class","timer")
+timerDiv.innerHTML=60
 
 
+boxDiv.addEventListener("click", printMousePos);
+
+document.body.append(title)
 document.body.append(boxDiv)
-document.body.append(startBtn)
+document.body.append(startBtn,resetBtn,timerDiv)
 boxDiv.append(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16)
+
+let status='stop'
+let countDown
 
 function createElement(value, id) {
   let temp = document.createElement("button")
@@ -85,10 +102,56 @@ function swapContent(target, blank) {
   console.log("swapping done")
 }
 
+function startTimer(status){
+  if(status==='start'){
+    countDown = setInterval(function(){
+      timerDiv.innerHTML--;
+      if(timerDiv.innerHTML<10){
+        timerDiv.style.color="red"
+      }
+      if(timerDiv.innerHTML<=0) {
+
+        title.innerHTML="Game Over! Press Restart"
+        status='stop'
+        document.body.style.backgroundColor = "red";
+        setTimeout(function(){
+          document.body.style.backgroundColor = "#011F3F";
+        },200)
+        clearInterval(countDown)
+      }
+    },100)
+  }
+
+}
+
 function startGame() {
+  title.innerHTML="......."
+  timerDiv.style.color="#fef2bf"
+  timerDiv.innerHTML=60
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, ""]
   arr = shuffle(arr)
   console.log(arr)
+  let bts = boxDiv.getElementsByTagName('button')
+  console.log(bts)
+
+  for (let i = 0; i < arr.length; i++) {
+    bts[i].innerHTML = arr[i]
+  }
+
+  status ="start"
+  startTimer(status)
+
+}
+
+function resetGame(){
+  title.innerHTML="Press Start"
+  timerDiv.style.color="#fef2bf"
+  timerDiv.innerHTML=60
+  clearInterval(countDown)
+  status='stop'
+  startTimer(status)
+  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, ""]
+
   let bts = boxDiv.getElementsByTagName('button')
   console.log(bts)
 

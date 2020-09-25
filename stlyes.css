@@ -1,19 +1,33 @@
+body {
+    /* text-align: center; */
+    background-color: #011F3F;
+}
+
+#level-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  margin:  5%;
+  color: #FEF2BF;
+  text-align: center;
+}
+
 .box {
   width: 400px;
   height: 400px;
   background-color: #e8e8e8;
-  margin-left: 450px;
-  margin-top: 100px;
+  margin-left: 550px;
+  margin-top: 70px;
   display: grid;
   grid-template-columns: auto auto auto auto;
+
 }
 
 .elements {
   width: 100px;
   height: 100px;
-  background-color: #28a745;
-  border-color: #006400;
-  color: white;
+  background-color: #0960bd;
+  border-color: #429ffd;
+  color: #FEF2BF;
   text-align: center;
   border-style: solid;
   /* border-color: #a2d5f2; */
@@ -36,17 +50,51 @@ button:focus{
 }
 
 #start-Btn{
-  font-size: 1.5rem;
-  background-color: #28a745;
-  border-color: #28a745;
-  color: #fff;
+  font-size: 1.2rem;
+  background-color: #fef2bf;
+  border-color: #fef2bf;
+  color: #011f3f;
   border-radius: .25rem;
   border: 1px solid transparent;
   padding: 5px;
-  margin-left: 450px;
+  margin-left: 550px;
   margin-top: 50px;
 }
 
 #start-Btn:hover {
-  background-color: #006400;
+  background-color: #fef200;
+}
+
+#reset-btn{
+  font-size: 1.2rem;
+  background-color: #fef2bf;
+  border-color: #fef2bf;
+  color: #011f3f;
+  border-radius: .25rem;
+  border: 1px solid transparent;
+  padding: 5px;
+  margin-left: 100px;
+  margin-top: 50px;
+}
+
+#reset-btn:hover {
+  background-color: #fef200;
+}
+
+.timer{
+  width: 100px;
+  height: 35px;
+  color: #fef2bf;
+  position: absolute;
+  left: 850px;
+  top: 646px;
+  text-align:center;
+  font-size: 2rem;
+  padding-top: 5px;
+  background-color: #011F3F;
+}
+
+.game-over{
+  background-color: red;
+  opacity: 0.8;
 }
