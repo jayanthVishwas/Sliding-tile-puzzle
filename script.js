@@ -6,7 +6,19 @@ let boxDiv = document.createElement("div")
 boxDiv.setAttribute("class", "box")
 
 let scoresTable = document.createElement("table")
+scoresTable.setAttribute("class","table-scores")
+let tr1 = document.createElement("tr")
+let td1 = document.createElement("td")
+td1.innerHTML="ID"
 
+let td2 = document.createElement("td")
+td2.innerHTML="Status"
+
+let td3 = document.createElement("td")
+td3.innerHTML="Score"
+
+tr1.append(td1,td2,td3)
+scoresTable.append(tr1)
 
 let e1 = createElement(1, "id1")
 let e2 = createElement(2, "id2")
@@ -135,6 +147,7 @@ function startTimer(status){
 
         generateScore()
         console.log(scores)
+        generateTable()
         clearInterval(countDown)
       }
     },1000)
@@ -194,9 +207,6 @@ function generateScore(){
       map['id'] = id
     }
   }
-
-
-
   scores.push(map)
 
 }
@@ -267,4 +277,20 @@ function playSound(name) {
   var audio = new Audio(name + ".mp3");
 
   audio.play();
+}
+
+function generateTable(){
+  let tr = document.createElement("tr")
+  let id = document.createElement("td")
+  let l =scores.length
+  id.innerHTML=scores[l-1].id
+
+  let sts = document.createElement("td")
+  sts.innerHTML=scores[l-1].status
+
+  let score = document.createElement("td")
+  score.innerHTML=scores[l-1].points
+
+  tr.append(id,sts,score)
+  scoresTable.append(tr)
 }

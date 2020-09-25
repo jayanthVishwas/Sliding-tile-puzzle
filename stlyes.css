@@ -101,5 +101,16 @@ button:focus{
 }
 
 .table-scores{
-  background-color: white;
+  background-color: #fef2bf;
+  color: #011F3F; 
+  position: absolute;
+  top: 200px;
+  left: 1150px;
+  border-spacing: 20px;
+  border-radius: 10px;
+}
+
+td{
+  margin-left: 100px;
+
 }
