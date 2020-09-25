@@ -19,7 +19,8 @@ body {
   margin-top: 70px;
   display: grid;
   grid-template-columns: auto auto auto auto;
-
+  border-style: solid;
+  border-color: #FEF2BF;
 }
 
 .elements {
@@ -97,4 +98,8 @@ button:focus{
 .game-over{
   background-color: red;
   opacity: 0.8;
+}
+
+.table-scores{
+  background-color: white;
 }

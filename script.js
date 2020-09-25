@@ -5,6 +5,8 @@ title.innerHTML="Press Start"
 let boxDiv = document.createElement("div")
 boxDiv.setAttribute("class", "box")
 
+let scoresTable = document.createElement("table")
+
 
 let e1 = createElement(1, "id1")
 let e2 = createElement(2, "id2")
@@ -42,11 +44,14 @@ boxDiv.addEventListener("click", printMousePos);
 
 document.body.append(title)
 document.body.append(boxDiv)
-document.body.append(startBtn,resetBtn,timerDiv)
+document.body.append(startBtn,resetBtn,timerDiv,scoresTable)
 boxDiv.append(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16)
 
 let status='stop'
 let countDown
+let gameStat =''
+let scores=[]
+let id=0
 
 function createElement(value, id) {
   let temp = document.createElement("button")
@@ -59,23 +64,28 @@ function createElement(value, id) {
 
 
 function printMousePos(event) {
-  console.log("X: " + event.clientX + " Y: " + event.clientY)
+  if(status==='start'){
+    console.log("X: " + event.clientX + " Y: " + event.clientY)
 
-  let target = document.getElementById(event.target.id)
+    let target = document.getElementById(event.target.id)
+    playSound("click")
+
+    let blank = getBlankElement(target)
+    // console.log(blank)
+
+    if (blank !== null) {
+      swapContent(target, blank)
+    }
+
+    console.log(timerDiv.innerHTML)
+    if(timerDiv.innerHTML==0) status = 'stop'
 
 
-  let blank = getBlankElement(target)
-  // console.log(blank)
+    if(isSolved()){
+      return
+    }
 
-  if (blank !== null) {
-    swapContent(target, blank)
   }
-
-  if(isSolved()){
-    alert("congratulations")
-    return
-  }
-
 }
 
 function getBlankElement(target) {
@@ -109,17 +119,27 @@ function startTimer(status){
       if(timerDiv.innerHTML<10){
         timerDiv.style.color="red"
       }
-      if(timerDiv.innerHTML<=0) {
-
+      if(isSolved()) {
+        gameStat='won'
+        clearInterval(countDown)
+      }
+      if(timerDiv.innerHTML<=0 && !isSolved()) {
+        gameStat='lost'
         title.innerHTML="Game Over! Press Restart"
         status='stop'
+        playSound("gameover")
         document.body.style.backgroundColor = "red";
         setTimeout(function(){
           document.body.style.backgroundColor = "#011F3F";
         },200)
+
+        generateScore()
+        console.log(scores)
         clearInterval(countDown)
       }
-    },100)
+    },1000)
+
+
   }
 
 }
@@ -138,10 +158,49 @@ function startGame() {
     bts[i].innerHTML = arr[i]
   }
 
+  id++
   status ="start"
   startTimer(status)
 
 }
+
+function generateScore(){
+  let map = {}
+  if(gameStat==='lost') {
+    map['points']=0
+    map['status']='lost'
+    map['id'] = id
+  }
+
+  if(gameStat=='won'){
+    if(timerDiv<10){
+      map['points']=7
+      map['status']='won'
+      map['id'] = id
+    }
+    if(timerDiv<20){
+      map['points']=8
+      map['status']='won'
+      map['id'] = id
+    }
+    if(timerDiv<30){
+      map['points']=9
+      map['status']='won'
+      map['id'] = id
+    }
+    if(timerDiv<40){
+      map['points']=10
+      map['status']='won'
+      map['id'] = id
+    }
+  }
+
+
+
+  scores.push(map)
+
+}
+
 
 function resetGame(){
   title.innerHTML="Press Start"
@@ -179,6 +238,7 @@ function isSolved() {
     e16.innerHTML == "" )
     {
     console.log("solved")
+    title.innerHTML="Congratulations"
     return true
   }
 
@@ -200,4 +260,11 @@ function shuffle(array) {
   }
 
   return array;
+}
+
+function playSound(name) {
+
+  var audio = new Audio(name + ".mp3");
+
+  audio.play();
 }
